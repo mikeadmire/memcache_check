@@ -1,6 +1,9 @@
 # MemcacheCheck
 
-TODO: Write a gem description
+  This gem was created to help diagnose problems with Memcached servers.
+  MemcacheCheck runs a series of set and get commands against a Memcached
+  server to validate data integrity, verify that the host is responding
+  correctly over repeated checks, and benchmark host speed.
 
 ## Installation
 
