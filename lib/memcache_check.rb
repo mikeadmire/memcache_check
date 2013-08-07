@@ -1,10 +1,11 @@
 require "memcache_check/version"
+require 'dalli'
 
 module MemcacheCheck
   class TestServer
 
-    def initialize(host = 'localhost')
-
+    def initialize(host = 'localhost', port = 11211)
+      @memcache = Dalli::Client.new("#{host}:#{port}")
     end
 
     def generate_key
@@ -12,9 +13,11 @@ module MemcacheCheck
     end
 
     def set(key, value)
+      @memcache.set(key, value)
     end
 
     def get(key)
+      @memcache.get(key)
     end
 
   end
