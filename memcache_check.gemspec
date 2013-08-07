@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "ZenTest", "~> 4.9.2"
 
   spec.add_runtime_dependency "dalli"
+  spec.add_runtime_dependency "faker"
 end
