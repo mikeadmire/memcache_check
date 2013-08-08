@@ -5,28 +5,38 @@ require 'benchmark'
 
 module MemcacheCheck
     class Checker
+        attr_reader :passes, :fails
+
         def initialize(server = 'localhost', port = '11211')
             @server = Server.new(server, port)
+            @passes = 0
+            @fails = 0
         end
 
         def start(num_times = 50)
-            passes = 0
-            fails = 0
             time = Benchmark.measure do
                 num_times.times do
-                    key, value = prepare_data
-                    @server.set(key, value)
-                    if is_valid?(key, value)
-                        passes += 1
-                    else
-                        fails += 1
-                    end
+                    test_server
                 end
             end
-            [passes, fails, time.real]
+            [@passes, @fails, time.real]
         end
 
-        def prepare_data
+        def test_server
+            key, value = create_key_value_pair
+            begin
+                @server.set(key, value)
+                if is_valid?(key, value)
+                    @passes += 1
+                else
+                    @fails += 1
+                end
+            rescue
+                @fails += 1
+            end
+        end
+
+        def create_key_value_pair
             [Utils.generate_key, Utils.generate_test_data]
         end
 

@@ -28,7 +28,7 @@ describe MemcacheCheck do
 
         it "passes and fails should add up to correct number" do
             passes, fails, time = @checker.start(50)
-            expect(passes + fails).to be(50)
+            expect(passes + fails).to eq(50)
         end
     end
 
