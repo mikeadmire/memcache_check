@@ -4,9 +4,39 @@ require 'memcache_check'
 
 describe MemcacheCheck do
 
+  describe "Checker" do
+
+    before(:each) do
+      @checker = MemcacheCheck::Checker.new
+    end
+
+    it { MemcacheCheck::Checker.should respond_to(:new) }
+
+    context "start" do
+        it { @checker.should respond_to(:start).with(1).arguments }
+
+        it "returns an array" do
+            expect(@checker.start).to be_an_instance_of(Array)
+        end
+
+        it "returns an array with 3 numeric elements" do
+            passes, fails, time = @checker.start
+            expect(passes).to be_an_instance_of(Fixnum)
+            expect(fails).to be_an_instance_of(Fixnum)
+            expect(time).to be_an_instance_of(Float)
+        end
+
+        it "passes and fails should add up to correct number" do
+            passes, fails, time = @checker.start(50)
+            expect(passes + fails).to be(50)
+        end
+    end
+
+  end
+
   context "Server" do
     before(:each) do
-      @tester = MemcacheCheck::Server.new
+      @tester = MemcacheCheck::Server.new('localhost', '11211')
     end
 
     it "can be instantiated" do
@@ -18,11 +48,13 @@ describe MemcacheCheck do
 
     it "set and retrieve data from memcached" do
       key = "abc123"
-      value = {name: 'Mike Admire', website: 'http://mikeadmire.com/'}
+      value = {name: 'Mike Admire',
+               text: "Lorem ipsum dolor sit amet, consectetur adipisicing" }
       @tester.set(key, value)
       expect(@tester.get(key)).to eq(value)
     end
   end
+
 
   describe "Utils" do
     it { MemcacheCheck::Utils.should respond_to :generate_key }
@@ -80,7 +112,6 @@ describe MemcacheCheck do
         expect(data2).to_not eq(data3)
       end
     end # generate_test_data
-
   end # Utils
   
 end

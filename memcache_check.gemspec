@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "dalli"
   spec.add_runtime_dependency "faker"
+  spec.add_runtime_dependency "benchmark"
 end
