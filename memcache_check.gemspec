@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = MemcacheCheck::VERSION
   spec.authors       = ["Mike Admire"]
   spec.email         = ["mike@mikeadmire.com"]
-  spec.description   = %q{Run checks against a Memcached server}
+  spec.description   = %q{Ruby gem to test the speed of a Memcached server and verify that it's working correctly.}
   spec.summary       = %q{MemcacheCheck runs a series of set and get commands against a Memcache host to validate data integrity, verify that the host is responding correctly, and benchmark host speed.}
   spec.homepage      = "https://github.com/mikeadmire/memcache_check"
   spec.license       = "MIT"
