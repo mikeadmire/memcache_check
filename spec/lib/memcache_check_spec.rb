@@ -29,6 +29,11 @@ describe MemcacheCheck do
         passes, fails, time = @checker.start(50)
         expect(passes + fails).to eq(50)
       end
+
+      it "passes while running locally" do
+        passes, fails, time = @checker.start(50)
+        expect(passes).to eq(50)
+      end
     end # context 'start'
   end # Checker
 

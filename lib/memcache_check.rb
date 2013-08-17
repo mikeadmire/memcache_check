@@ -37,7 +37,7 @@ module MemcacheCheck
     def run_test
       key, value = Utils.new.generate_key_value_pair
       begin
-        @server.set(key, value)
+        set(key, value)
         if is_valid?(key, value)
           @passes += 1
         else
