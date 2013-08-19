@@ -69,6 +69,14 @@ describe MemcacheCheck do
           expect(i.time).to be_an_instance_of(Benchmark::Tms)
         end
       end
+
+      it "localhost should be close to the same twice in a row" do
+        first = @response_array[0]
+        second = @response_array[1]
+        third = @response_array[2]
+        expect(first.time.real.round(1)).to eq(second.time.real.round(1))
+        expect(second.time.real.round(1)).to eq(third.time.real.round(1))
+      end
     end # group_benchmark
 
   end # Checker
