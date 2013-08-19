@@ -35,6 +35,42 @@ describe MemcacheCheck do
         expect(passes).to eq(50)
       end
     end # context 'start'
+
+    describe "group_benchmark" do
+      before(:each) do
+        @response_array = MemcacheCheck::Checker.group_benchmark('localhost', '127.0.0.1', 'localhost')
+      end
+
+      it { MemcacheCheck::Checker.should respond_to(:group_benchmark) }
+
+      it "returns an array the same length as the number of hostname arguments" do
+        expect(@response_array.length).to eq(3)
+      end
+
+      it "returns an array of Server objects" do
+        expect(@response_array.first).to be_an_instance_of(MemcacheCheck::Server)
+      end
+
+      it "passes and fails should add up to the correct number" do
+        @response_array.each do |i|
+          expect(i.passes + i.fails).to eq(100)
+        end
+      end
+
+      it "passes every time when running local" do
+        @response_array.each do |i|
+          expect(i.passes).to eq(100)
+        end
+      end
+
+      it "response hostname and time are populated" do
+        @response_array.each do |i|
+          expect(i.hostname).to_not be_nil
+          expect(i.time).to be_an_instance_of(Benchmark::Tms)
+        end
+      end
+    end # group_benchmark
+
   end # Checker
 
   context "Server" do

@@ -13,14 +13,24 @@ module MemcacheCheck
       @server.benchmark(num_times)
       [@server.passes, @server.fails, @server.time.real]
     end
+
+    def self.group_benchmark(*args)
+      group = []
+      args.each do |hostname|
+        server = Server.new(hostname)
+        server.benchmark(100)
+        group << server
+      end
+      group
+    end
   end
 
   class Server
-    attr_reader :host, :port, :passes, :fails, :time
+    attr_reader :hostname, :port, :passes, :fails, :time
 
-    def initialize(host = '127.0.0.1', port = '11211')
-      @memcache_client = Dalli::Client.new("#{host}:#{port}")
-      @host = host
+    def initialize(hostname = '127.0.0.1', port = '11211')
+      @memcache_client = Dalli::Client.new("#{hostname}:#{port}")
+      @hostname = hostname
       @port = port
       @passes = 0
       @fails = 0
