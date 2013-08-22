@@ -104,11 +104,11 @@ describe MemcacheCheck do
 
 
   describe "Utils" do
-    it { MemcacheCheck::Utils.new.should respond_to :generate_key_value_pair }
+    it { MemcacheCheck::Utils.should respond_to :generate_key_value_pair }
 
     describe "generate_key_value_pair" do
       before(:each) do
-        @key, @data = MemcacheCheck::Utils.new.generate_key_value_pair
+        @key, @data = MemcacheCheck::Utils.generate_key_value_pair
       end
 
       context "key" do
@@ -121,9 +121,9 @@ describe MemcacheCheck do
         end
 
         it "is unique" do
-          key1 = MemcacheCheck::Utils.new.generate_key_value_pair.first
-          key2 = MemcacheCheck::Utils.new.generate_key_value_pair.first
-          key3 = MemcacheCheck::Utils.new.generate_key_value_pair.first
+          key1 = MemcacheCheck::Utils.generate_key_value_pair.first
+          key2 = MemcacheCheck::Utils.generate_key_value_pair.first
+          key3 = MemcacheCheck::Utils.generate_key_value_pair.first
           expect(@key).to_not eq(key1)
           expect(@key).to_not eq(key2)
           expect(@key).to_not eq(key3)
@@ -144,9 +144,9 @@ describe MemcacheCheck do
         end
 
         it "is unique" do
-          data1 = MemcacheCheck::Utils.new.generate_key_value_pair.last
-          data2 = MemcacheCheck::Utils.new.generate_key_value_pair.last
-          data3 = MemcacheCheck::Utils.new.generate_key_value_pair.last
+          data1 = MemcacheCheck::Utils.generate_key_value_pair.last
+          data2 = MemcacheCheck::Utils.generate_key_value_pair.last
+          data3 = MemcacheCheck::Utils.generate_key_value_pair.last
           expect(@data).to_not eq(data1)
           expect(@data).to_not eq(data2)
           expect(@data).to_not eq(data3)
