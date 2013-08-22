@@ -14,6 +14,7 @@ module MemcacheCheck
     end
 
     def benchmark(num_times)
+      test_run
       @time = Benchmark.measure do
         num_times.times do
           run_test
@@ -32,6 +33,15 @@ module MemcacheCheck
         end
       rescue
         @fails += 1
+      end
+    end
+
+    def test_run
+      key, value = Utils.generate_key_value_pair
+      begin
+        set(key, value)
+        get(key)
+      rescue
       end
     end
 
