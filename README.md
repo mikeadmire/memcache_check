@@ -69,6 +69,7 @@ against each hostname and returns an array of Server objects once the
 benchmark has completed.
 
 The Server attributes available are:
+
     - hostname   (string)
     - port       (string)
     - passes     (fixnum)
