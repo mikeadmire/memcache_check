@@ -46,7 +46,6 @@ The start method returns an array of 3 numbers:
 
 example.rb
 
-    ```ruby
     require 'memcache_check'
 
     memcache_check = MemcacheCheck::Checker.new('127.0.0.1')
@@ -55,7 +54,6 @@ example.rb
     puts "Number of passes: #{passes}"
     puts "Number of failures: #{fails}"
     puts "Total time: #{time} seconds"
-    ```
 
 Running on my local machine this produces:
 
@@ -79,7 +77,6 @@ The Server attributes available are:
 
 example.rb
 
-    ```ruby
     require 'memcache_check'
 
     memcache_check = MemcacheCheck::Checker.group_benchmark('127.0.0.1', 'localhost', '127.0.0.1')
@@ -91,7 +88,6 @@ example.rb
       puts "Total time: #{server.time.real.round(3)}"
       puts
     end
-    ```
 
 Running on my local machine this produces:
 
